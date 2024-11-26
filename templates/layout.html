@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Главная{% endblock %}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='black-cat.ico') }}" type="image/x-icon">
+    <style>
+        body {
+            padding-bottom: 60px; /* Отступ для футера */
+        }
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Главная</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">О нас</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('gallery') }}">Галерея</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('author') }}">Авторизация</a></li>
+                {% if session.username %}
+                <li class="nav-item"><a class="nav-link" href="{{ url_for('logout') }}">Выход</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                <div class="alert alert-info">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>© 2024 Мое приложение</p>
+    </footer>
+</body>
+</html>

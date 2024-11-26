@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistics</title>
+</head>
+<body>
+    <h1>User Statistics</h1>
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Message Count</th>
+            <th>Command Count</th>
+            <th>Last Active</th>
+        </tr>
+        {% for stat in user_stats %}
+        <tr>
+            <td>{{ stat.username }}</td>
+            <td>{{ stat.message_count }}</td>
+            <td>{{ stat.command_count }}</td>
+            <td>{{ stat.last_active }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>Command Usage Statistics</h1>
+    <table>
+        <tr>
+            <th>Command</th>
+            <th>Count</th>
+            <th>Date</th>
+        </tr>
+        {% for stat in command_stats %}
+        <tr>
+            <td>{{ stat.command_name }}</td>
+            <td>{{ stat.count }}</td>
+            <td>{{ stat.usage_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
